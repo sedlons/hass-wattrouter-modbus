@@ -1,0 +1,395 @@
+modbus:
+  - name: wattrouter_m
+    type: tcp
+    host: 192.168.1.100  # ZMENTE NA IP VASEHO ZARIZENI
+    [cite_start]port: 502            # Port 502 dle dokumentace 
+    
+    sensors:
+      # --- Měřené hodnoty (Input Registers)  ---
+      - name: "Wattrouter Power L1"
+        unique_id: wattrouter_power_l1
+        address: 0
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        data_type: int32
+        scale: 10
+        precision: 0
+
+      - name: "Wattrouter Power L2"
+        unique_id: wattrouter_power_l2
+        address: 2
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        data_type: int32
+        scale: 10
+        precision: 0
+
+      - name: "Wattrouter Power L3"
+        unique_id: wattrouter_power_l3
+        address: 4
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        data_type: int32
+        scale: 10
+        precision: 0
+
+      - name: "Wattrouter Power Sum L1+L2+L3"
+        unique_id: wattrouter_power_sum
+        address: 6
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        state_class: measurement
+        data_type: int32
+        scale: 10
+        precision: 0
+
+      - name: "Wattrouter Voltage L1"
+        unique_id: wattrouter_voltage_l1
+        address: 8
+        input_type: input
+        unit_of_measurement: "V"
+        device_class: voltage
+        state_class: measurement
+        data_type: int32
+        precision: 0
+
+      # --- Stavové registry (Raw data pro bitové senzory níže)  ---
+      - name: "Wattrouter Error Word Raw"
+        unique_id: wattrouter_error_word
+        address: 10
+        input_type: input
+        data_type: uint16
+
+      - name: "Wattrouter Info Word Raw"
+        unique_id: wattrouter_info_word
+        address: 11
+        input_type: input
+        data_type: uint16
+
+      # --- FB Vstupy  ---
+      - name: "Wattrouter Power FB1"
+        unique_id: wattrouter_power_fb1
+        address: 12
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy FB1"
+        unique_id: wattrouter_energy_fb1
+        address: 14
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Power FB2"
+        unique_id: wattrouter_power_fb2
+        address: 16
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy FB2"
+        unique_id: wattrouter_energy_fb2
+        address: 18
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+        
+      - name: "Wattrouter Power FB3"
+        unique_id: wattrouter_power_fb3
+        address: 20
+        input_type: input
+        unit_of_measurement: "W"
+        device_class: power
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy FB3"
+        unique_id: wattrouter_energy_fb3
+        address: 22
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # --- Výstupy (Triaky, Relé, SSR) [cite: 19] ---
+      # TRIAC 1
+      - name: "Wattrouter Load Power Triac1"
+        unique_id: wattrouter_power_triac1
+        address: 28
+        input_type: input
+        unit_of_measurement: "W"
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy Triac1"
+        unique_id: wattrouter_energy_triac1
+        address: 30
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # TRIAC 2
+      - name: "Wattrouter Load Power Triac2"
+        unique_id: wattrouter_power_triac2
+        address: 32
+        input_type: input
+        unit_of_measurement: "W"
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy Triac2"
+        unique_id: wattrouter_energy_triac2
+        address: 34
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # RELAY 1
+      - name: "Wattrouter Load Power Relay1"
+        unique_id: wattrouter_power_relay1
+        address: 36
+        input_type: input
+        unit_of_measurement: "W"
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy Relay1"
+        unique_id: wattrouter_energy_relay1
+        address: 38
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # RELAY 2
+      - name: "Wattrouter Load Power Relay2"
+        unique_id: wattrouter_power_relay2
+        address: 40
+        input_type: input
+        unit_of_measurement: "W"
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy Relay2"
+        unique_id: wattrouter_energy_relay2
+        address: 42
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # SSR 1
+      - name: "Wattrouter Load Power SSR1"
+        unique_id: wattrouter_power_ssr1
+        address: 44
+        input_type: input
+        unit_of_measurement: "W"
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy SSR1"
+        unique_id: wattrouter_energy_ssr1
+        address: 46
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # SSR 2
+      - name: "Wattrouter Load Power SSR2"
+        unique_id: wattrouter_power_ssr2
+        address: 48
+        input_type: input
+        unit_of_measurement: "W"
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Energy SSR2"
+        unique_id: wattrouter_energy_ssr2
+        address: 50
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # --- Statistiky aktuálního dne (Sumární) [cite: 19] ---
+      - name: "Wattrouter Cons. HT Total"
+        unique_id: wattrouter_cons_ht_total
+        address: 92
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Cons. LT Total"
+        unique_id: wattrouter_cons_lt_total
+        address: 94
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Surplus Total"
+        unique_id: wattrouter_surplus_total
+        address: 96
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      - name: "Wattrouter Production Total"
+        unique_id: wattrouter_production_total
+        address: 98
+        input_type: input
+        unit_of_measurement: "Wh"
+        device_class: energy
+        state_class: total_increasing
+        data_type: int32
+        scale: 10
+
+      # --- Info o zařízení (Textová pole) [cite: 19, 24] ---
+      # Stringy zabírají 2 registry (4 byty) nebo více.
+      - name: "Wattrouter Device Type"
+        unique_id: wattrouter_device_type
+        address: 124
+        input_type: input
+        data_type: string
+        count: 2 # 4 znaky/bajty
+
+      - name: "Wattrouter Firmware Version"
+        unique_id: wattrouter_firmware_version
+        address: 126
+        input_type: input
+        data_type: string
+        count: 2
+
+      - name: "Wattrouter Device Option"
+        unique_id: wattrouter_device_option
+        address: 128
+        input_type: input
+        data_type: string
+        count: 2
+
+    # --- Ovládací registry (Holding Registers - Zápis) [cite: 30] ---
+    # Používáme "number" entitu, protože hodnota je 0-1000 (nejen ON/OFF)
+    number:
+      - name: "Wattrouter Switch Triac1"
+        unique_id: wattrouter_switch_triac1
+        address: 0
+        min_value: 0
+        max_value: 1000
+        step: 100 # Krok pro slider
+        mode: slider
+      
+      - name: "Wattrouter Switch Triac2"
+        unique_id: wattrouter_switch_triac2
+        address: 1
+        min_value: 0
+        max_value: 1000
+        mode: slider
+
+      - name: "Wattrouter Switch Relay1"
+        unique_id: wattrouter_switch_relay1
+        address: 2
+        min_value: 0
+        max_value: 1000
+        mode: slider
+
+      - name: "Wattrouter Switch Relay2"
+        unique_id: wattrouter_switch_relay2
+        address: 3
+        min_value: 0
+        max_value: 1000
+        mode: slider
+
+      - name: "Wattrouter Switch SSR1"
+        unique_id: wattrouter_switch_ssr1
+        address: 4
+        min_value: 0
+        max_value: 1000
+        mode: slider
+
+      - name: "Wattrouter Switch SSR2"
+        unique_id: wattrouter_switch_ssr2
+        address: 5
+        min_value: 0
+        max_value: 1000
+        mode: slider
+
+
+
+template:
+  - binary_sensor:
+      # --- Error Word (Adresa 10) ---
+      - name: "Wattrouter Error Missing Voltage L1"
+        state: "{{ is_state_attr('sensor.wattrouter_error_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_error_word_raw') | int | bitwise_and(1)) > 0 }}"
+        device_class: problem
+        
+      - name: "Wattrouter Error Temp Sensor"
+        state: "{{ is_state_attr('sensor.wattrouter_error_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_error_word_raw') | int | bitwise_and(2)) > 0 }}"
+        device_class: problem
+
+      - name: "Wattrouter Error DC Source Overload"
+        state: "{{ is_state_attr('sensor.wattrouter_error_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_error_word_raw') | int | bitwise_and(8)) > 0 }}"
+        device_class: problem
+
+      - name: "Wattrouter Error Max Temp Exceeded"
+        state: "{{ is_state_attr('sensor.wattrouter_error_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_error_word_raw') | int | bitwise_and(32)) > 0 }}"
+        device_class: heat
+
+      # --- Info Word (Adresa 11) ---
+      - name: "Wattrouter Info Low Tariff"
+        state: "{{ is_state_attr('sensor.wattrouter_info_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_info_word_raw') | int | bitwise_and(1)) > 0 }}"
+        icon: mdi:currency-usd-off
+
+      - name: "Wattrouter Info CombiWATT Active"
+        state: "{{ is_state_attr('sensor.wattrouter_info_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_info_word_raw') | int | bitwise_and(2)) > 0 }}"
+        icon: mdi:flash-auto
+
+      - name: "Wattrouter Info Output Test Active"
+        state: "{{ is_state_attr('sensor.wattrouter_info_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_info_word_raw') | int | bitwise_and(4)) > 0 }}"
+        device_class: running
+
+      - name: "Wattrouter Info Summer Time"
+        state: "{{ is_state_attr('sensor.wattrouter_info_word_raw', 'state', 'unavailable') == false and (states('sensor.wattrouter_info_word_raw') | int | bitwise_and(8)) > 0 }}"
+        icon: mdi:weather-sunny
