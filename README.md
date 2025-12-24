@@ -1,6 +1,8 @@
 # hass-wattrouter-modbus
 Modbus configuration in Home Assistant for Wattrouter. No addon needed.
 
+#### Note: I tested this only with M.
+
 Important Setup Notes:
  - Update your wattrouter to latest firmware. 
  - IP Address: Replace 192.168.1.100 in the code with the actual IP address of your WATTrouter.
@@ -19,3 +21,4 @@ The manual states:
 
 #### Important Warning Regarding Output Control 
 Home Assistant sends the value only once upon change by default. If you want permanent switching via Modbus, you must create an automation in HA that will repeatedly send the value (e.g., using the number.set_value or modbus.write_register service) as long as the device is supposed to be on.
+
