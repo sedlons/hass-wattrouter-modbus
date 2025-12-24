@@ -2,7 +2,7 @@ modbus:
   - name: wattrouter_m
     type: tcp
     host: 192.168.1.100  # ZMENTE NA IP VASEHO ZARIZENI
-    [cite_start]port: 502            # Port 502 dle dokumentace 
+    port: 502            # Port 502 dle dokumentace 
     
     sensors:
       # --- Měřené hodnoty (Input Registers)  ---
